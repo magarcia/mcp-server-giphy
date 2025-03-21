@@ -1,4 +1,5 @@
 # MCP Server Giphy
+[![smithery badge](https://smithery.ai/badge/mcp-server-giphy)](https://smithery.ai/server/mcp-server-giphy)
 
 MCP Server for the Giphy API, enabling AI models to search, retrieve, and utilize GIFs from Giphy.
 
@@ -53,6 +54,14 @@ Each GIF in the response includes:
 - Additional metadata when available
 
 ## Setup
+
+### Installing via Smithery
+
+To install mcp-server-giphy for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-server-giphy):
+
+```bash
+npx -y @smithery/cli install mcp-server-giphy --client claude
+```
 
 ### Giphy API Key
 

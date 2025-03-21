@@ -3,8 +3,25 @@ name: CI
 on:
   push:
     branches: ["**"]
+    paths:
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+      - '**.json'
+      - 'package*.json'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches: [main]
+    paths:
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+      - '**.json'
+      - 'package*.json'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
 
 jobs:
   test:
@@ -27,6 +44,8 @@ jobs:
 
       - name: Run tests
         run: npm test
+        env:
+          GIPHY_API_KEY: dummy-api-key-for-tests
 
       - name: Run linting
         run: npm run lint

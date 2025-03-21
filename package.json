@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-giphy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An implementation of Giphy integration with Model Context Protocol",
   "author": "Martin Garcia Monterde <hola@magarcia.io>",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-giphy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An implementation of Giphy integration with Model Context Protocol",
   "author": "Martin Garcia Monterde <hola@magarcia.io>",
   "license": "MIT",
@@ -28,10 +28,26 @@
     "giphy",
     "model-context-protocol"
   ],
+  "targets": {
+    "main": {
+      "context": "node",
+      "includeNodeModules": false,
+      "outputFormat": "esmodule",
+      "isLibrary": true,
+      "optimize": true,
+      "engines": {
+        "node": ">=18.0.0"
+      },
+      "source": "src/shebang.js"
+    }
+  },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
-    "start": "npm run build && node dist/index.js",
+    "prebuild": "npm run clean",
+    "build": "tsc && npm run bundle",
+    "postbuild": "chmod +x dist/index.js",
+    "bundle": "parcel build --target main --dist-dir dist",
+    "start": "node dist/index.js",
     "dev": "ts-node --files src/index.ts",
     "inspector": "npx @modelcontextprotocol/inspector npm run start",
     "lint": "eslint src",
@@ -51,6 +67,7 @@
     "eslint": "^8.57.1",
     "globals": "^16.0.0",
     "jest": "^29.5.0",
+    "parcel": "^2.12.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",

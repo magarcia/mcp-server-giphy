@@ -1,14 +1,16 @@
 import { searchGifs, getRandomGif, getTrendingGifs } from "./service.js";
 import * as configModule from "./config.js";
 import { GiphyGif, GiphyResponse, GiphyRandomResponse } from "./types.js";
+import axios from "axios";
 
 // Mock the buildUrl function from the config module
 jest.mock("./config.js", () => ({
   buildUrl: jest.fn(),
 }));
 
-// Mock the global fetch function
-global.fetch = jest.fn();
+// Mock axios
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Service Module", () => {
   // Sample GIF data for testing
@@ -43,20 +45,16 @@ describe("Service Module", () => {
     (configModule.buildUrl as jest.Mock).mockReturnValue(
       "https://mocked-url.com"
     );
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: true,
-      json: jest.fn(),
-    });
+    mockedAxios.get.mockResolvedValue({ data: {} });
   });
 
   describe("searchGifs", () => {
     it("should call buildUrl with the correct parameters", async () => {
-      // Mock the fetch response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValueOnce({
+      // Mock the axios response
+      mockedAxios.get.mockResolvedValueOnce({
+        data: {
           data: [mockGif],
-        } as GiphyResponse),
+        } as GiphyResponse,
       });
 
       // Call the function
@@ -77,33 +75,58 @@ describe("Service Module", () => {
         lang: "en",
       });
 
-      // Verify fetch was called
-      expect(global.fetch).toHaveBeenCalledWith("https://mocked-url.com");
+      // Verify axios was called
+      expect(mockedAxios.get).toHaveBeenCalledWith("https://mocked-url.com");
     });
 
-    it("should throw an error when the API response is not ok", async () => {
-      // Mock a failed fetch response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: false,
-        status: 400,
-        statusText: "Bad Request",
+    it("should handle Axios errors correctly", async () => {
+      // Use a simpler approach to mock the axios error
+      mockedAxios.get.mockImplementation(() => {
+        // Create a custom error with Axios error properties
+        const error = new Error("Request failed");
+        // Add axios error properties
+        (
+          error as unknown as {
+            isAxiosError: boolean;
+            response: { status: number; statusText: string };
+          }
+        ).isAxiosError = true;
+        (
+          error as unknown as {
+            isAxiosError: boolean;
+            response: { status: number; statusText: string };
+          }
+        ).response = {
+          status: 400,
+          statusText: "Bad Request",
+        };
+        return Promise.reject(error);
       });
 
-      // Call the function and expect it to throw
       await expect(searchGifs({ query: "test" })).rejects.toThrow(
-        "Giphy API error: 400 Bad Request"
+        "Giphy API error: Request failed"
+      );
+    });
+
+    it("should handle non-Axios errors correctly", async () => {
+      // Regular Error object
+      const regularError = new Error("Network Error");
+
+      mockedAxios.get.mockRejectedValueOnce(regularError);
+
+      await expect(searchGifs({ query: "test" })).rejects.toThrow(
+        "Giphy API error: Network Error"
       );
     });
   });
 
   describe("getRandomGif", () => {
     it("should call buildUrl with the correct parameters", async () => {
-      // Mock the fetch response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValueOnce({
+      // Mock the axios response
+      mockedAxios.get.mockResolvedValueOnce({
+        data: {
           data: mockGif,
-        } as GiphyRandomResponse),
+        } as GiphyRandomResponse,
       });
 
       // Call the function
@@ -118,19 +141,18 @@ describe("Service Module", () => {
         tag: "test tag",
       });
 
-      // Verify fetch was called
-      expect(global.fetch).toHaveBeenCalledWith("https://mocked-url.com");
+      // Verify axios was called
+      expect(mockedAxios.get).toHaveBeenCalledWith("https://mocked-url.com");
     });
   });
 
   describe("getTrendingGifs", () => {
     it("should call buildUrl with the correct parameters", async () => {
-      // Mock the fetch response
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValueOnce({
+      // Mock the axios response
+      mockedAxios.get.mockResolvedValueOnce({
+        data: {
           data: [mockGif],
-        } as GiphyResponse),
+        } as GiphyResponse,
       });
 
       // Call the function
@@ -147,8 +169,8 @@ describe("Service Module", () => {
         rating: "g",
       });
 
-      // Verify fetch was called
-      expect(global.fetch).toHaveBeenCalledWith("https://mocked-url.com");
+      // Verify axios was called
+      expect(mockedAxios.get).toHaveBeenCalledWith("https://mocked-url.com");
     });
   });
 });

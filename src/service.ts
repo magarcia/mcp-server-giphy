@@ -1,5 +1,6 @@
 import { buildUrl } from "./config.js";
 import type { GiphyGif, GiphyRandomResponse, GiphyResponse } from "./types.js";
+import axios from "axios";
 
 export async function searchGifs(params: {
   query: string;
@@ -19,16 +20,22 @@ export async function searchGifs(params: {
   };
 
   const url = buildUrl("search", searchParams);
-  const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error(
-      `Giphy API error: ${response.status} ${response.statusText}`
-    );
+  try {
+    const response = await axios.get(url);
+    const responseData = response.data as GiphyResponse;
+    return formatGifs(responseData.data);
+  } catch (error) {
+    let errorMsg = "Giphy API error";
+
+    if (axios.isAxiosError(error) && error.response) {
+      errorMsg = `${errorMsg}: ${error.response.status} ${error.response.statusText}`;
+    } else if (error instanceof Error) {
+      errorMsg = `${errorMsg}: ${error.message}`;
+    }
+
+    throw new Error(errorMsg);
   }
-
-  const responseData: GiphyResponse = await response.json();
-  return formatGifs(responseData.data);
 }
 
 export async function getRandomGif(params: {
@@ -46,16 +53,22 @@ export async function getRandomGif(params: {
   }
 
   const url = buildUrl("random", searchParams);
-  const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error(
-      `Giphy API error: ${response.status} ${response.statusText}`
-    );
+  try {
+    const response = await axios.get(url);
+    const responseData = response.data as GiphyRandomResponse;
+    return formatGif(responseData.data);
+  } catch (error) {
+    let errorMsg = "Giphy API error";
+
+    if (axios.isAxiosError(error) && error.response) {
+      errorMsg = `${errorMsg}: ${error.response.status} ${error.response.statusText}`;
+    } else if (error instanceof Error) {
+      errorMsg = `${errorMsg}: ${error.message}`;
+    }
+
+    throw new Error(errorMsg);
   }
-
-  const responseData: GiphyRandomResponse = await response.json();
-  return formatGif(responseData.data);
 }
 
 export async function getTrendingGifs(params: {
@@ -72,16 +85,22 @@ export async function getTrendingGifs(params: {
   };
 
   const url = buildUrl("trending", searchParams);
-  const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error(
-      `Giphy API error: ${response.status} ${response.statusText}`
-    );
+  try {
+    const response = await axios.get(url);
+    const responseData = response.data as GiphyResponse;
+    return formatGifs(responseData.data);
+  } catch (error) {
+    let errorMsg = "Giphy API error";
+
+    if (axios.isAxiosError(error) && error.response) {
+      errorMsg = `${errorMsg}: ${error.response.status} ${error.response.statusText}`;
+    } else if (error instanceof Error) {
+      errorMsg = `${errorMsg}: ${error.message}`;
+    }
+
+    throw new Error(errorMsg);
   }
-
-  const responseData: GiphyResponse = await response.json();
-  return formatGifs(responseData.data);
 }
 
 // Helper function to format a single GIF for response

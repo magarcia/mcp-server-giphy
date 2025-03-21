@@ -1,5 +1,10 @@
 # MCP Server Giphy
+
 [![smithery badge](https://smithery.ai/badge/mcp-server-giphy)](https://smithery.ai/server/mcp-server-giphy)
+[![CI](https://github.com/magarcia/mcp-server-giphy/actions/workflows/ci.yml/badge.svg)](https://github.com/magarcia/mcp-server-giphy/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/mcp-server-giphy.svg)](https://www.npmjs.com/package/mcp-server-giphy)
+[![npm downloads](https://img.shields.io/npm/dm/mcp-server-giphy.svg)](https://www.npmjs.com/package/mcp-server-giphy)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 MCP Server for the Giphy API, enabling AI models to search, retrieve, and utilize GIFs from Giphy.
 

@@ -38,20 +38,22 @@
       "engines": {
         "node": ">=16.0.0"
       },
-      "source": "src/shebang.js"
+      "source": "src/index.ts",
+      "distDir": "dist"
     }
   },
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rm -rf build dist",
     "prebuild": "npm run clean",
     "build": "tsc && npm run bundle",
     "postbuild": "chmod +x dist/index.js",
-    "bundle": "parcel build --target main --dist-dir dist",
+    "bundle": "parcel build --target main --no-cache",
     "start": "node dist/index.js",
     "dev": "ts-node --files src/index.ts",
-    "inspector": "npx @modelcontextprotocol/inspector npm run start",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
+    "preinspector": "npm run build",
+    "inspector": "npx @modelcontextprotocol/inspector npm run start",
     "test": "jest"
   },
   "dependencies": {

@@ -1,0 +1,89 @@
+You are an expert in TypeScript, Node.js, and RESTful API development. This project is a GIPHY API client library.
+
+# TypeScript Standards
+
+- Use TypeScript for all new code; avoid any `any` types
+- Prefer interfaces over types for API response objects
+- Use type predicates and guards to handle nullable values rather than type assertions
+- Export well-defined response types for all API endpoints
+- Use descriptive variable names that reflect the GIPHY API terminology
+
+# Code Structure
+
+- Keep files focused on a single responsibility
+- Separate API endpoint functions by category (search, trending, random, etc.)
+- Use async/await for all API requests, not Promises with .then()
+- Handle rate limiting and error responses consistently
+- Include JSDoc comments for all public methods and interfaces
+
+# API Client Design
+
+- Ensure all API endpoints support the full range of parameters from GIPHY API
+- Include proper pagination support for endpoints that return multiple results
+- Use reasonable defaults for optional parameters
+- Make the client configurable with options like rating, language, etc.
+- Implement proper error handling with custom error types
+
+# Testing Standards
+
+- Write unit tests for all API endpoint functions
+- Use mocks for external API calls in tests
+- Include integration tests that validate against real API responses
+- Test error handling scenarios like rate limiting and invalid API keys
+- Ensure all public interfaces have test coverage
+
+# Performance Considerations
+
+- Implement request caching where appropriate
+- Support both ESM and CommonJS module formats
+- Keep dependencies minimal and up-to-date
+- Ensure the package has a small bundle size
+- Support tree-shaking for modular imports
+
+# Documentation
+
+- Keep README examples up-to-date with the current API
+- Include TypeDoc documentation for all public interfaces
+- Document rate limiting considerations
+- Provide usage examples for each API endpoint category
+- Include sample response objects in documentation
+
+# Best Practices
+
+- Favor immutable objects over mutable ones
+- Use private class fields to hide implementation details
+- Implement proper parameter validation before making API requests
+- Use URL builder helper functions to construct API URLs
+- Apply consistent error handling patterns throughout the codebase
+
+# Contribution Guidelines
+
+## Commit Message Format
+
+- Follow [Conventional Commits](https://www.conventionalcommits.org/) format
+- Structure: `<type>(<scope>): <subject>`
+- Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
+- Use present tense, imperative mood in commit messages
+
+## Pull Request Process
+
+- Ensure code adheres to existing code style
+- Update documentation if necessary
+- Verify all tests pass
+- Obtain review from at least one maintainer before merging
+
+## Code Style
+
+- Follow TypeScript best practices
+- Use configured ESLint for code linting
+- Write clear comments for functions and complex logic
+- Include JSDoc comments for public APIs
+
+## Development Workflow
+
+- Fork the repository
+- Create a feature branch: `feature/your-feature-name`
+- Test your changes: `npm test`
+- Lint your code: `npm run lint`
+- Build the project: `npm run build`
+- Submit a pull request with comprehensive description

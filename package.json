@@ -1,0 +1,59 @@
+{
+  "name": "mcp-server-giphy",
+  "version": "1.0.0",
+  "description": "An implementation of Giphy integration with Model Context Protocol",
+  "author": "Martin Garcia Monterde <hola@magarcia.io>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "mcp-server-giphy": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magarcia/mcp-server-giphy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/magarcia/mcp-server-giphy/issues"
+  },
+  "homepage": "https://github.com/magarcia/mcp-server-giphy#readme",
+  "keywords": [
+    "mcp",
+    "giphy",
+    "model-context-protocol"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "start": "npm run build && node dist/index.js",
+    "dev": "ts-node --files src/index.ts",
+    "inspector": "npx @modelcontextprotocol/inspector npm run start",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.1",
+    "globals": "^16.0.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.27.0"
+  }
+}

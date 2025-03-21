@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & Discussions
+    url: https://github.com/magarcia/mcp-server-giphy/discussions
+    about: For general questions and discussions about this project
+  - name: Documentation
+    url: https://github.com/magarcia/mcp-server-giphy#readme
+    about: Check out the README for usage information

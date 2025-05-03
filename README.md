@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/magarcia-mcp-server-giphy-badge.png)](https://mseep.ai/app/magarcia-mcp-server-giphy)
+
 # MCP Server Giphy
 
 [![smithery badge](https://smithery.ai/badge/mcp-server-giphy)](https://smithery.ai/server/mcp-server-giphy)

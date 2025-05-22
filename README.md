@@ -1,6 +1,5 @@
 # MCP Server Giphy
 
-[![smithery badge](https://smithery.ai/badge/mcp-server-giphy)](https://smithery.ai/server/mcp-server-giphy)
 [![CI](https://github.com/magarcia/mcp-server-giphy/actions/workflows/ci.yml/badge.svg)](https://github.com/magarcia/mcp-server-giphy/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/mcp-server-giphy.svg)](https://www.npmjs.com/package/mcp-server-giphy)
 [![npm downloads](https://img.shields.io/npm/dm/mcp-server-giphy.svg)](https://www.npmjs.com/package/mcp-server-giphy)
@@ -59,14 +58,6 @@ Each GIF in the response includes:
 - Additional metadata when available
 
 ## Setup
-
-### Installing via Smithery
-
-To install mcp-server-giphy for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-server-giphy):
-
-```bash
-npx -y @smithery/cli install mcp-server-giphy --client claude
-```
 
 ### Giphy API Key
 
